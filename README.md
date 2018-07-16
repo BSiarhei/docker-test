@@ -2,10 +2,10 @@
 
 run following commands in main folder:
 
-1. docker-compose up
+1. docker-compose up -d
 2. cd main
 3. docker build -t main .
-4. docker run -v //var/run/docker.sock:/var/run/docker.sock -p 3000:3000 main
+4. docker run -d -v //var/run/docker.sock:/var/run/docker.sock -p 3000:3000 main
 
 API
 ```
