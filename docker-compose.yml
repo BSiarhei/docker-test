@@ -1,0 +1,10 @@
+version: '3'
+services:
+  firstTestContainer:
+    image: firsttestcontainer
+    container_name: firsttestcontainer
+    build: dockerContainerOne
+  secondTestContainer:
+    image: secondtestcontainer
+    container_name: secondtestcontainer
+    build: dockerContainerTwo

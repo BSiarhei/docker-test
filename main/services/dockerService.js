@@ -39,6 +39,24 @@ class DockerService {
             });
         })
     }
+
+    logs(containerId) {
+        const container = this.docker.getContainer(containerId);
+
+        return new Promise((resolve, reject) => {
+            container.logs({
+                follow: false,
+                stdout: true,
+                stderr: true
+            }, (error, data) => {
+                if (error) {
+                    return reject(error);
+                }
+
+                return resolve(data);
+            });
+        })
+    }
 }
 
 module.exports = new DockerService(new Docker());

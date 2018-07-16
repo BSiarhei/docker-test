@@ -13,8 +13,14 @@ class LogRepository {
         this.LOGS_FOLDER = LOGS_FOLDER;
     }
 
-    async logStream(key, stream) {
-        const writeStream = await fs.createWriteStream(this._getLogPath(key));
+    async logStream(key, stream, defaultLogs) {
+        if (defaultLogs) {
+            await fs.writeFile(this._getLogPath(key), defaultLogs);
+        }
+
+        const writeStream = await fs.createWriteStream(this._getLogPath(key), {
+            flags: defaultLogs ? 'a' : 'w'
+        });
 
         stream.pipe(writeStream);
 

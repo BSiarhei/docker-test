@@ -1,7 +1,16 @@
 # docker-test
 
-docker build -t main .
+run following commands in main folder:
 
-docker run -v //var/run/docker.sock:/var/run/docker.sock -p 3000:3000 main
+1. docker-compose up
+2. cd main
+3. docker build -t main .
+4. docker run -v //var/run/docker.sock:/var/run/docker.sock -p 3000:3000 main
 
-docker run main
+API
+```
+GET localhost:3000/containers - list containers
+POST localhost:3000/containers/:containerId/logs - link container logs
+GET localhost:3000/containers/:containerId/logs - get container logs
+DELETE localhost:3000/containers/:containerId/logs - unlink container logs
+```
