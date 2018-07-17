@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Docker test</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<div>
+    <% containers.forEach((container) => { %>
+    <div class="containers-list">
+        <span><%= container.name %></span>
+        <span><%= container.state %></span>
+        <span><%= container.status %></span>
+        <button type="button" data-id="<%= container.id %>" data-action="getLogs">View logs</button>
+        <button type="button" data-id="<%= container.id %>" data-action="attachLogs">Attach logs</button>
+        <button type="button" data-id="<%= container.id %>" data-action="detachLogs">Detach logs</button>
+    </div>
+    <% }); %>
+    <div>
+        <span class="status"></span>
+    </div>
+    <div>
+        <textarea class="logs-container"></textarea>
+    </div>
+</div>
+<script>
+    $(function(){
+        const URLS = {
+            containerLogs: '/api/containers/:containerId/logs'
+        }
+
+        const statusSpan = $('.status');
+        const logsContainer = $('.logs-container');
+
+        function getLogs(containerId) {
+            $.ajax({
+                url: URLS.containerLogs.replace(':containerId', containerId),
+                type : 'GET'
+            }).done((data) => {
+                logsContainer.val(data);
+            }).fail(errorHandler);
+        }
+
+        function attachLogs(containerId) {
+            $.ajax({
+                url: URLS.containerLogs.replace(':containerId', containerId),
+                type : 'POST'
+            }).done(() => {
+                statusSpan.text('Logs are attached');
+            }).fail(errorHandler);
+        }
+
+        function detachLogs(containerId) {
+            $.ajax({
+                url: URLS.containerLogs.replace(':containerId', containerId),
+                type : 'DELETE'
+            }).done(() => {
+                statusSpan.text('Logs are detached');
+            }).fail(errorHandler);
+        }
+
+        function errorHandler(error) {
+            if (error.status === 404) {
+                statusSpan.text('Not found');
+            } else {
+                statusSpan.text('Server error');
+            }
+        }
+
+        $('.containers-list').click((event) => {
+            event.preventDefault();
+
+            if (event.target.type !== 'button') {
+                return;
+            }
+
+            const containerId = $(event.target).data('id');
+            const action = $(event.target).data('action');
+
+            switch (action) {
+                case 'getLogs':
+                    getLogs(containerId);
+                    break;
+                case 'attachLogs':
+                    attachLogs(containerId);
+                    break;
+                case 'detachLogs':
+                    detachLogs(containerId);
+                    break;
+            }
+        });
+    });
+</script>
+</body>
+</html>

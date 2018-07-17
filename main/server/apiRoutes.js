@@ -22,6 +22,6 @@ containerRouter.delete('/:containerId/logs', wrapper(containerController.unlinkC
 
 containerRouter.post('/:containerId/logs', wrapper(containerController.linkContainerLogs));
 
-router.use('/containers', containerRouter);
+router.use('/api/containers', containerRouter);
 
 module.exports = router;

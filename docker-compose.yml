@@ -3,8 +3,8 @@ services:
   firstTestContainer:
     image: firsttestcontainer
     container_name: firsttestcontainer
-    build: dockerContainerOne
+    build: firstTestContainer
   secondTestContainer:
     image: secondtestcontainer
     container_name: secondtestcontainer
-    build: dockerContainerTwo
+    build: secondTestContainer

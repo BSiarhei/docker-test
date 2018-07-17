@@ -1,6 +1,6 @@
 const Docker = require('dockerode');
 
-class DockerService {
+class DockerContainerService {
     constructor(docker) {
         this.docker = docker;
     }
@@ -15,7 +15,7 @@ class DockerService {
                 return resolve(containers.map((container) => {
                     return {
                         id: container.Id,
-                        names: container.Names,
+                        name: container.Names[0].substring(1),
                         state: container.State,
                         status: container.Status
                     }
@@ -59,4 +59,4 @@ class DockerService {
     }
 }
 
-module.exports = new DockerService(new Docker());
+module.exports = new DockerContainerService(new Docker());

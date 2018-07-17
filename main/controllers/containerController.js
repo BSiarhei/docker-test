@@ -1,9 +1,9 @@
-const dockerService = require('../services/dockerService');
+const dockerContainerService = require('../services/dockerContainerService');
 const logRepository = require('../repositories/logRepository');
 
 class ContainerController {
     async getList(req, res, next) {
-        const containers = await dockerService.getList();
+        const containers = await dockerContainerService.getList();
 
         res.send(containers);
     }
@@ -24,7 +24,7 @@ class ContainerController {
     async linkContainerLogs(req, res, next) {
         const containerId = req.params.containerId;
 
-        const [ logs, stream ] = await Promise.all([dockerService.logs(containerId), dockerService.attach(containerId)]);
+        const [ logs, stream ] = await Promise.all([dockerContainerService.logs(containerId), dockerContainerService.attach(containerId)]);
 
         await logRepository.logStream(containerId, stream, logs);
 

@@ -3,7 +3,8 @@ const path = require('path');
 
 const LOGS_FOLDER = 'logs';
 
-fs.ensureDir(LOGS_FOLDER);
+fs.ensureDirSync(LOGS_FOLDER);
+fs.emptyDirSync(LOGS_FOLDER);
 
 const NotFoundError = require('../errors/notFoundError');
 
@@ -14,6 +15,10 @@ class LogRepository {
     }
 
     async logStream(key, stream, defaultLogs) {
+        if (fs.pathExists(this._getLogPath(key))) {
+            await this._clearKey(key);
+        }
+
         if (defaultLogs) {
             await fs.writeFile(this._getLogPath(key), defaultLogs);
         }
@@ -27,7 +32,7 @@ class LogRepository {
         this.STREAMS_SOURCE[key] = stream;
 
         writeStream.on('error', (error) => {
-            console.log('error', error);
+            console.log('write stream error', error);
         });
     }
 
@@ -42,20 +47,27 @@ class LogRepository {
     }
 
     async removeLogStream(key) {
-        const stream = this.STREAMS_SOURCE[key];
-        if (!stream) {
+        if (!this.STREAMS_SOURCE[key]) {
             throw new NotFoundError('Log is not found');
         }
 
-        stream.destroy();
-
-        delete this.STREAMS_SOURCE[key];
-
-        await fs.unlink(this._getLogPath(key));
+        await this._clearKey(key);
     }
 
     _getLogPath(fileName) {
         return path.join(this.LOGS_FOLDER, `${fileName}.txt`)
+    }
+
+    async _clearKey(key) {
+        const stream = this.STREAMS_SOURCE[key];
+
+        if (stream) {
+            stream.destroy();
+        }
+
+        delete this.STREAMS_SOURCE[key];
+
+        await fs.remove(this._getLogPath(key));
     }
 }
 

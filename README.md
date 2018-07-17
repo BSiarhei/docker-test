@@ -9,8 +9,8 @@ run following commands in main folder:
 
 API
 ```
-GET localhost:3000/containers - list containers
-POST localhost:3000/containers/:containerId/logs - link container logs
-GET localhost:3000/containers/:containerId/logs - get container logs
-DELETE localhost:3000/containers/:containerId/logs - unlink container logs
+GET localhost:3000/api/containers - list containers
+POST localhost:3000/api/containers/:containerId/logs - link container logs
+GET localhost:3000/api/containers/:containerId/logs - get container logs
+DELETE localhost:3000/api/containers/:containerId/logs - unlink container logs
 ```

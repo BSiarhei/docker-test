@@ -1,10 +1,15 @@
 const express = require('express');
 
-const routes = require('./routes');
+const apiRoutes = require('./apiRoutes');
+const viewRoutes = require('./viewRoutes');
 
 const app = express();
 
-app.use(routes);
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+app.use(viewRoutes);
+app.use(apiRoutes);
 
 app.use((req, res, next) => {
     res.status(404).end();
