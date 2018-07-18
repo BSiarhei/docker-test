@@ -19,3 +19,11 @@ POST localhost:3000/api/containers/:containerId/logs - link container logs
 GET localhost:3000/api/containers/:containerId/logs - get container logs
 DELETE localhost:3000/api/containers/:containerId/logs - unlink container logs
 ```
+
+to stop containers
+```
+docker ps
+docker stop containerid(main)
+cd ..
+docker-compose stop
+```
