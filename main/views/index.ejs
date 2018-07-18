@@ -35,8 +35,8 @@
             $.ajax({
                 url: URLS.containerLogs.replace(':containerId', containerId),
                 type : 'GET'
-            }).done((data) => {
-                logsContainer.val(data);
+            }).done((logs) => {
+                logsContainer.val(logs);
             }).fail(errorHandler);
         }
 
@@ -72,6 +72,8 @@
             if (event.target.type !== 'button') {
                 return;
             }
+
+            logsContainer.val('');
 
             const containerId = $(event.target).data('id');
             const action = $(event.target).data('action');
