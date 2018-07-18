@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "eslint-config-airbnb-base"
+  ],
+  "rules": {
+    "arrow-body-style": ["error", "as-needed"],
+    "linebreak-style": "off",
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "indent": ["error", 4, {"SwitchCase": 1}],
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", "never"],
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+    "no-unused-vars": ["error", {"vars": "all", "args": "none"}],
+    "max-len": ["error", 150]
+  }
+}

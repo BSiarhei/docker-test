@@ -1,5 +1,3 @@
-'use strict';
-
 class BaseError extends Error {
     constructor(message, innerError) {
         super(message);

@@ -11,7 +11,7 @@ class LogsService {
     }
 
     async link(containerId) {
-        const [ logs, stream ] = await Promise.all([dockerContainerService.logs(containerId), dockerContainerService.attach(containerId)]);
+        const [logs, stream] = await Promise.all([dockerContainerService.logs(containerId), dockerContainerService.attach(containerId)]);
 
         await logRepository.logStream(containerId, stream, logs);
     }

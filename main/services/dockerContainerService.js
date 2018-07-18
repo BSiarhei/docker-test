@@ -18,7 +18,7 @@ class DockerContainerService {
                         name: container.Names[0].substring(1),
                         state: container.State,
                         status: container.Status
-                    }
+                    };
                 }));
             });
         });
@@ -37,7 +37,7 @@ class DockerContainerService {
 
                 return resolve(stream);
             });
-        })
+        });
     }
 
     logs(containerId) {
@@ -55,7 +55,7 @@ class DockerContainerService {
 
                 return resolve(data);
             });
-        })
+        });
     }
 }
 

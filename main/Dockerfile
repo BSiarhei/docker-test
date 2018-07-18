@@ -4,7 +4,7 @@ WORKDIR /app
 
 ADD . /app
 
-RUN npm install
+RUN npm install --ignore-scripts --only=production
 
 EXPOSE 3000
 

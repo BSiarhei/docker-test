@@ -55,7 +55,7 @@ class LogRepository {
     }
 
     _getLogPath(fileName) {
-        return path.join(this.LOGS_FOLDER, `${fileName}.txt`)
+        return path.join(this.LOGS_FOLDER, `${fileName}.txt`);
     }
 
     async _clearKey(key) {

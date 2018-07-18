@@ -1,5 +1,5 @@
 {
-  "name": "docker-test",
+  "name": "eslint-plugin-import",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,5 +13,11 @@
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "fs-extra": "^6.0.1"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "eslint-plugin-import": "^2.8.0",
+    "eslint": "^5.1.0",
+    "eslint-config-airbnb-base": "^13.0.0"
   }
 }
