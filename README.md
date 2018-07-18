@@ -7,6 +7,11 @@ run following commands in main folder:
 3. docker build -t main .
 4. docker run -d -v //var/run/docker.sock:/var/run/docker.sock -p 3000:3000 main
 
+UI
+```
+localhost:3000/
+```
+
 API
 ```
 GET localhost:3000/api/containers - list containers
